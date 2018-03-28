@@ -1,16 +1,15 @@
 version: '3.4'
 services:
-
-  tracker1:
+  tracker1: 
     build: ./fastdfs-tracker
-    image: 'jiuli/fastdfs-tracker'
+    image: jiuli/fastdfs-tracker
     volumes:
       - /home/fastdfs/tracker1/conf/fdfs_config:/etc/fdfs
     ports:
       - "22122:22122"
     
   tracker2:
-    image: 'jiuli/fastdfs-tracker'
+    image: jiuli/fastdfs-tracker
     volumes:
       - /home/fastdfs/tracker2/conf/fdfs_config:/etc/fdfs
     ports:
@@ -18,18 +17,18 @@ services:
   
   fastdht1:
     build: ./fastdht
-    image: 'jiuli/fastdht'
+    image: jiuli/fastdht
     volumes:
       - /home/fastdfs/fastdht1/conf/fdht_config:/etc/fdht
     
   fastdht2:
-    image: 'jiuli/fastdht'
+    image: jiuli/fastdht
     volumes:
       - /home/fastdfs/fastdht2/conf/fdht_config:/etc/fdht
     
   group1_storage1:
     build: ./fastdfs-storage-dht
-    image: 'jiuli/fastdfs-storage-dht'
+    image: jiuli/fastdfs-storage-dht
     volumes:
       - /home/fastdfs/group1-storage1/conf/fdht_config:/etc/fdht
       - /home/fastdfs/group1-storage1/conf/fdfs_config:/etc/fdfs
@@ -44,7 +43,7 @@ services:
       - fastdht2:fastdht2
       
   group1_storage2:
-    image: 'jiuli/fastdfs-storage-dht'
+    image: jiuli/fastdfs-storage-dht
     volumes:
       - /home/fastdfs/group1-storage2/conf/fdht_config:/etc/fdht
       - /home/fastdfs/group1-storage2/conf/fdfs_config:/etc/fdfs
@@ -60,17 +59,17 @@ services:
       
 #group2      
   fastdht3:
-    image: 'jiuli/fastdht'
+    image: jiuli/fastdht
     volumes:
       - /home/fastdfs/fastdht3/conf/fdht_config:/etc/fdht
     
   fastdht4:
-    image: 'jiuli/fastdht'
+    image: jiuli/fastdht
     volumes:
       - /home/fastdfs/fastdht4/conf/fdht_config:/etc/fdht
     
   group2_storage1:
-    image: 'jiuli/fastdfs-storage-dht'
+    image: jiuli/fastdfs-storage-dht
     volumes:
       - /home/fastdfs/group2-storage1/conf/fdht_config:/etc/fdht
       - /home/fastdfs/group2-storage1/conf/fdfs_config:/etc/fdfs
@@ -85,7 +84,7 @@ services:
       - fastdht4:fastdht4
       
   group2_storage2:
-    image: 'jiuli/fastdfs-storage-dht'
+    image: jiuli/fastdfs-storage-dht
     volumes:
       - /home/fastdfs/group2-storage2/conf/fdht_config:/etc/fdht
       - /home/fastdfs/group2-storage2/conf/fdfs_config:/etc/fdfs
@@ -101,7 +100,7 @@ services:
       
   storage_proxy:
     build: ./fastdfs-storage-proxy
-    image: 'jiuli/fastdfs-storage-proxy'
+    image: jiuli/fastdfs-storage-proxy
     volumes:
       - /home/fastdfs/storage-proxy/conf/nginx_config:/usr/local/openresty/nginx/conf
     ports:
