@@ -4,5 +4,5 @@ fastdfs的服务集合，包含tracker与storage服务，集成阿里云的yum.r
 根据docker-compose.yml中的编排，可直接运行fastdfs中的服务
 - 首先通过命令docker build分别构建各服务镜像
 - 在fastdf根目录执行命令：docker-compose up
-
+![image](https://github.com/jiuli/fastdfs-docker/blob/master/fastdfs-fastdht-infrastructure.png)
  
