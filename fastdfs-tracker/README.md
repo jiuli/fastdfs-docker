@@ -1,5 +1,5 @@
 # fastdfs服务集合
-[![](https://images.microbadger.com/badges/version/jiuli/fastdfs-tracker.svg)](https://microbadger.com/images/jiuli/fastdfs-tracker "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/jiuli//fastdfs-tracker.svg)](https://microbadger.com/images/jiuli//fastdfs-tracker "Get your own version badge on microbadger.com")
 
 fastdfs的服务集合，包含tracker与storage服务，集成阿里云的yum.repo,使安装速度更加快速！
 
@@ -12,15 +12,15 @@ fastdfs的服务集合，包含tracker与storage服务，集成阿里云的yum.r
 # 启动命令
 ```java
 # 172.17.0.2
-docker run -dit -p 181:80 -p 22122:22122 --name tracker1 jiuli/fastdfs-tracker
+docker run -dit -p 181:80 -p 22122:22122 --name tracker1 jiuli//fastdfs-tracker
 # 172.17.0.3
-docker run -dit -p 182:80 -p 22123:22122 --name tracker2 jiuli/fastdfs-tracker
+docker run -dit -p 182:80 -p 22123:22122 --name tracker2 jiuli//fastdfs-tracker
 # 172.17.0.4
-docker run -dit -p 281:80 -p 23000:23000 --name u_group1_storage1 --link tracker1:tracker1 --link tracker2:tracker2 jiuli/fastdfs-storage-dht
+docker run -dit -p 281:80 -p 23000:23000 --name u_group1_storage1 --link tracker1:tracker1 --link tracker2:tracker2 jiuli//fastdfs-storage-dht
 # 172.17.0.5
-docker run -dit -p 282:80 -p 23001:23000 --name u_group1_storage2 --link tracker1:tracker1 --link tracker2:tracker2 jiuli/fastdfs-storage-dht
+docker run -dit -p 282:80 -p 23001:23000 --name u_group1_storage2 --link tracker1:tracker1 --link tracker2:tracker2 jiuli//fastdfs-storage-dht
 # 172.17.0.5
-docker run -dit -p 282:80 -p 23001:23000 --name u_group1_storage2 --link tracker1:tracker1 --link tracker2:tracker2 jiuli/fastdfs-storage-dht
+docker run -dit -p 282:80 -p 23001:23000 --name u_group1_storage2 --link tracker1:tracker1 --link tracker2:tracker2 jiuli//fastdfs-storage-dht
 ```
 如果生成ip不是上面的话，运行可能会出错，你需要自行修改所有相关文件夹下的配置文件（/etc/fdfs/*,/etc/fdht/*），手动停止与手动启动服务
 

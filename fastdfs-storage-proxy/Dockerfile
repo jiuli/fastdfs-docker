@@ -2,7 +2,7 @@
 FROM centos:7
 
 #AUTHOR
-MAINTAINER imlzw <imlzw@imlzw.com>
+MAINTAINER jiuli <jiuli@jiuli.com>
 
 #安装wget
 RUN yum install -y wget

@@ -1,2 +1,2 @@
-docker build -t jiuli/fastdfs-fastdht ./
+docker build -t jiuli//fastdfs-fastdht ./
 pause

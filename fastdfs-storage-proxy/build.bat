@@ -1,2 +1,2 @@
-docker build -t jiuli/fastdfs-storage-proxy ./
+docker build -t jiuli//fastdfs-storage-proxy ./
 pause

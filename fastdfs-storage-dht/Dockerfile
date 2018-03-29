@@ -2,7 +2,7 @@
 FROM centos:7
 
 #AUTHOR
-MAINTAINER imlzw <imlzw@imlzw.com>
+MAINTAINER jiuli <jiuli@jiuli.com>
 
 #安装wget
 RUN yum install -y wget
@@ -18,10 +18,10 @@ RUN yum install -y zlib zlib-devel pcre pcre-devel gcc gcc-c++ openssl openssl-d
 
 #配置环境变量
 ENV CENTOS_VERSION=7 \
-  USER_ROOT=/home/imlzw \
-  FASTDFS_PATH=/home/imlzw/fastdfs \
-  FASTDFS_STORAGE_PATH=/home/imlzw/fastdfs/storage \
-  FASTDFS_STORAGE_DATA_PATH=/home/imlzw/fastdfs/storage/data \
+  USER_ROOT=/home/jiuli \
+  FASTDFS_PATH=/home/jiuli/fastdfs \
+  FASTDFS_STORAGE_PATH=/home/jiuli/fastdfs/storage \
+  FASTDFS_STORAGE_DATA_PATH=/home/jiuli/fastdfs/storage/data \
   LIB_FAST_COMMON_VERSION=1.0.36 \
   FASTDFS_VERSION=5.11 \
   NGINX_VERSION=1.11.7 \
@@ -63,11 +63,11 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY fdht_config/* /etc/fdht/
 COPY fdfs_config/* /etc/fdfs/
 COPY nginx_config/nginx.conf /usr/local/nginx/conf/nginx.conf
-COPY ["start","stop","/home/imlzw/"]
-RUN chmod +x /home/imlzw/start \
-  && chmod +x /home/imlzw/stop \
-  && ln -s /home/imlzw/start /usr/local/bin/start_fdfs \
-  && ln -s /home/imlzw/stop /usr/local/bin/stop_fdfs
+COPY ["start","stop","/home/jiuli/"]
+RUN chmod +x /home/jiuli/start \
+  && chmod +x /home/jiuli/stop \
+  && ln -s /home/jiuli/start /usr/local/bin/start_fdfs \
+  && ln -s /home/jiuli/stop /usr/local/bin/stop_fdfs
 
 CMD ["bash","start_fdfs"] 
 

@@ -1,2 +1,2 @@
-docker build -t jiuli/fastdfs-tracker ./
+docker build -t jiuli//fastdfs-tracker ./
 pause

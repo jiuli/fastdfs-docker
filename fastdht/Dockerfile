@@ -2,7 +2,7 @@
 FROM centos:7
 
 #AUTHOR
-MAINTAINER imlzw <imlzw@imlzw.com>
+MAINTAINER jiuli <jiuli@jiuli.com>
 
 #安装wget
 RUN yum install -y wget
@@ -18,7 +18,7 @@ RUN yum install -y zlib zlib-devel pcre pcre-devel gcc gcc-c++ openssl openssl-d
 
 #配置环境变量
 ENV CENTOS_VERSION=7 \
-  FASTDFS_PATH=/home/imlzw/fastdfs \
+  FASTDFS_PATH=/home/jiuli/fastdfs \
   BERKELEY_DB_VERSION=6.2.23 \
   LIB_FAST_COMMON_VERSION=1.0.36 \
   FASTDHT_VERSION=7fac37e9a8e2c9ee2d4ccc309f96dbd35f2e0403
@@ -54,10 +54,10 @@ RUN cp /usr/local/db-${BERKELEY_DB_VERSION}/lib/libdb-${BERKELEY_DB_VERSION:0:3}
 #添加初始化配置
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY fdht_config/* /etc/fdht/
-COPY ["start","stop","/home/imlzw/"]
-RUN chmod +x /home/imlzw/start \
-  && chmod +x /home/imlzw/stop \
-  && ln -s /home/imlzw/start /usr/local/bin/start_fdht \
-  && ln -s /home/imlzw/stop /usr/local/bin/stop_fdht
+COPY ["start","stop","/home/jiuli/"]
+RUN chmod +x /home/jiuli/start \
+  && chmod +x /home/jiuli/stop \
+  && ln -s /home/jiuli/start /usr/local/bin/start_fdht \
+  && ln -s /home/jiuli/stop /usr/local/bin/stop_fdht
 
 CMD ["bash","start_fdht"] 
