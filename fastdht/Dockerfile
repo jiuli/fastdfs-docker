@@ -14,7 +14,8 @@ ENV CENTOS_VERSION=7 \
 #上面版本号为git commit时候生成的sha1 hash值。
 
 #创建必要的目录
-RUN mkdir -p ${FASTDFS_PATH}/fastdht
+RUN mkdir -p ${FASTDFS_PATH}/fastdht \
+	mkdir -p ${FASTDHT_CONFIG}
 
 #安装wget
 RUN yum install -y wget

@@ -5,6 +5,8 @@ FROM centos:7
 MAINTAINER jiuli <554856005@qq.com>
 #配置环境变量
 ENV CENTOS_VERSION=7 \
+  FASTDHT_CONFIG=/etc/fdht \
+  FASTDFS_CONFIG=/etc/fdfs \
   USER_ROOT=/home/jiuli \
   FASTDFS_PATH=/home/jiuli/fastdfs \
   FASTDFS_STORAGE_PATH=/home/jiuli/fastdfs/storage \
@@ -13,13 +15,14 @@ ENV CENTOS_VERSION=7 \
   FASTDFS_VERSION=5.11 \
   NGINX_VERSION=1.11.7 \
   FASTDFS_NGINX_VERSION=5a8110f57ec55ff580260cf1fc6aa152a5a4c574
-
+	
 #创建必要的目录
 RUN mkdir -p ${FASTDFS_PATH}/download \
   && mkdir -p ${FASTDFS_STORAGE_PATH} \
   && mkdir -p ${FASTDFS_PATH}/client \
-  && mkdir -p ${FASTDFS_PATH}/mod 
-  
+  && mkdir -p ${FASTDFS_PATH}/mod \ 
+  && mkdir -p ${FASTDHT_CONFIG} \
+  && mkdir -p ${FASTDFS_CONFIG}
 #安装wget
 RUN yum install -y wget
 
@@ -50,7 +53,7 @@ RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install"]
 
 #安装fastdfs
 WORKDIR ${FASTDFS_PATH}/download/fastdfs/fastdfs-${FASTDFS_VERSION}
-RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install && cp conf/* /etc/fdfs/"] 
+RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install"] 
 
 #安装nginx
 WORKDIR ${FASTDFS_PATH}/download/nginx/nginx-${NGINX_VERSION}
