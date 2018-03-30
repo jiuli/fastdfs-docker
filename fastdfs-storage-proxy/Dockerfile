@@ -2,7 +2,18 @@
 FROM centos:7
 
 #AUTHOR
-MAINTAINER jiuli <jiuli@jiuli.com>
+MAINTAINER jiuli <554856005@qq.com>
+
+#配置环境变量
+ENV CENTOS_VERSION=7 \
+  PROXY_PATH=/home/proxy \
+  LUAJIT_VERSION=2.0.4 \
+  OPENRESTY_VERSION=1.11.2.2 \
+  UPSTREAM_CHECK_VERSION=0.3.0 \
+  NGX_CACHE_PURGE_VERSION=2.3
+
+#创建必要的目录
+RUN mkdir -p ${PROXY_PATH}/download
 
 #安装wget
 RUN yum install -y wget
@@ -16,16 +27,6 @@ RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backu
 #安装工具集
 RUN yum install -y zlib zlib-devel pcre pcre-devel gcc gcc-c++ openssl openssl-devel libevent libevent-devel perl unzip net-tools git
 
-#配置环境变量
-ENV CENTOS_VERSION=7 \
-  PROXY_PATH=/home/proxy \
-  LUAJIT_VERSION=2.0.4 \
-  OPENRESTY_VERSION=1.11.2.2 \
-  UPSTREAM_CHECK_VERSION=0.3.0 \
-  NGX_CACHE_PURGE_VERSION=2.3
-
-#创建必要的目录
-RUN mkdir -p ${PROXY_PATH}/download
 
 #下载
 #RUN wget "http://luajit.org/download/LuaJIT-${LUAJIT_VERSION}.tar.gz" -P ${PROXY_PATH}/download/luajit 
@@ -63,4 +64,4 @@ RUN chmod +x ${PROXY_PATH}/start \
   && ln -s ${PROXY_PATH}/start /usr/local/bin/start_proxy \
   && ln -s ${PROXY_PATH}/stop /usr/local/bin/stop_proxy
 
-CMD ["bash","start_proxy"] 
+CMD ["/bin/bash","start_proxy"] 
