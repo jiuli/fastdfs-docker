@@ -6,6 +6,7 @@ MAINTAINER jiuli <554856005@qq.com>
 
 #配置环境变量
 ENV CENTOS_VERSION=7 \
+  FASTDHT_CONFIG=/etc/fdht  \
   FASTDFS_PATH=/home/jiuli/fastdfs \
   BERKELEY_DB_VERSION=6.2.23 \
   LIB_FAST_COMMON_VERSION=1.0.36 \
