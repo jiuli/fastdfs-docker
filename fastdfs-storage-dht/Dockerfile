@@ -71,4 +71,3 @@ RUN chmod +x /home/jiuli/start \
   && ln -s /home/jiuli/stop /usr/local/bin/stop_fdfs
 
 CMD ["/bin/bash","start_fdfs"] 
-
