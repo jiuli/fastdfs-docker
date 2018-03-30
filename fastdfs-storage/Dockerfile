@@ -2,19 +2,7 @@
 FROM centos:7
 
 #AUTHOR
-MAINTAINER jiuli <jiuli@jiuli.com>
-
-#安装wget
-RUN yum install -y wget
-
-#更换yum源 
-RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup \
-	&& wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
-	&& yum clean all \
-	&& yum makecache 
-
-#安装工具集
-RUN yum install -y zlib zlib-devel pcre pcre-devel gcc gcc-c++ openssl openssl-devel libevent libevent-devel perl unzip net-tools git
+MAINTAINER jiuli <554856005@qq.com>
 
 #配置环境变量
 ENV CENTOS_VERSION=7 \
@@ -31,6 +19,20 @@ RUN mkdir -p ${FASTDFS_PATH}/download \
  && mkdir -p ${FASTDFS_STORAGE_PATH} \
  && mkdir -p ${FASTDFS_PATH}/client \
  && mkdir -p ${FASTDFS_PATH}/mod 
+ 
+#安装wget
+RUN yum install -y wget
+
+#更换yum源 
+RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup \
+	&& wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
+	&& yum clean all \
+	&& yum makecache 
+
+#安装工具集
+RUN yum install -y zlib zlib-devel pcre pcre-devel gcc gcc-c++ openssl openssl-devel libevent libevent-devel perl unzip net-tools git
+
+
 
 #fastdfs-nginx-module解决storage之间同步延迟，找不到文件的问题，fastdfs-nginx-module可重定向文件连接到源服务器找到文件。
 #下载
@@ -69,4 +71,4 @@ RUN chmod +x /home/jiuli/start \
   && ln -s /home/jiuli/start /usr/local/bin/start_fdfs \
   && ln -s /home/jiuli/stop /usr/local/bin/stop_fdfs
 
-CMD ["bash","start_fdfs"]
+CMD ["/bin/bash","start_fdfs"]
