@@ -2,7 +2,7 @@
 FROM centos:7
 
 #AUTHOR
-MAINTAINER jiuli <jiuli@554856005@qq.com>
+MAINTAINER jiuli <554856005@qq.com>
 
 #配置环境变量
 ENV CENTOS_VERSION=7 \
