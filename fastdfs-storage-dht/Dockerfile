@@ -51,7 +51,7 @@ RUN tar zxvf ${FASTDFS_PATH}/download/libfastcommon/V${LIB_FAST_COMMON_VERSION}.
 WORKDIR ${FASTDFS_PATH}/download/libfastcommon/libfastcommon-${LIB_FAST_COMMON_VERSION}
 RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install"]
 RUN ln -s /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so \
-	&& ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so \
+#	&& ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so \
  	&&	ln -s /usr/lib64/libfdfsclient.so /usr/local/lib/libfdfsclient.so \
     && ln -s /usr/lib64/libfdfsclient.so /usr/lib/libfdfsclient.so
     
