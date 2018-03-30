@@ -50,11 +50,20 @@ RUN tar zxvf ${FASTDFS_PATH}/download/libfastcommon/V${LIB_FAST_COMMON_VERSION}.
 #安装libfastcommon
 WORKDIR ${FASTDFS_PATH}/download/libfastcommon/libfastcommon-${LIB_FAST_COMMON_VERSION}
 RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install"]
-
+RUN ln -s /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so \
+	&& ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so \
+ 	&&	ln -s /usr/lib64/libfdfsclient.so /usr/local/lib/libfdfsclie nt.so \
+    && ln -s /usr/lib64/libfdfsclient.so /usr/lib/libfdfsclient.so
+    
 #安装fastdfs
 WORKDIR ${FASTDFS_PATH}/download/fastdfs/fastdfs-${FASTDFS_VERSION}
 RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install"] 
 
+RUN ln -s /usr/bin/fdfs_trackerd   /usr/local/bin \
+	&& ln -s /usr/bin/fdfs_storaged   /usr/local/bin \
+	&& ln -s /usr/bin/stop.sh         /usr/local/bin \
+	&& ln -s /usr/bin/restart.sh      /usr/local/bin
+	
 #安装nginx
 WORKDIR ${FASTDFS_PATH}/download/nginx/nginx-${NGINX_VERSION}
 RUN ./configure --add-module=${FASTDFS_PATH}/download/nginx_module/fastdfs-nginx-module-${FASTDFS_NGINX_VERSION}/src \
@@ -67,10 +76,11 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY fdht_config/* /etc/fdht/
 COPY fdfs_config/* /etc/fdfs/
 COPY nginx_config/nginx.conf /usr/local/nginx/conf/nginx.conf
-COPY ["start","stop","/home/jiuli/"]
-RUN chmod +x /home/jiuli/start \
-  && chmod +x /home/jiuli/stop \
-  && ln -s /home/jiuli/start /usr/local/bin/start_fdfs \
-  && ln -s /home/jiuli/stop /usr/local/bin/stop_fdfs
+# COPY ["start","stop","/home/jiuli/"]
+RUN /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+#RUN chmod +x /home/jiuli/start \
+#  && chmod +x /home/jiuli/stop \
+#  && ln -s /home/jiuli/start /usr/local/bin/start_fdfs \
+#  && ln -s /home/jiuli/stop /usr/local/bin/stop_fdfs
 
-CMD ["/bin/bash","start_fdfs"] 
+CMD ["/etc/init.d/fdfs_storaged", "start"] 

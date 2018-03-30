@@ -40,19 +40,29 @@ RUN tar zxvf ${FASTDFS_PATH}/download/libfastcommon/V${LIB_FAST_COMMON_VERSION}.
 #瀹夎libfastcommon
 WORKDIR ${FASTDFS_PATH}/download/libfastcommon/libfastcommon-${LIB_FAST_COMMON_VERSION}
 RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install"]
-
+RUN ln -s /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so \
+	&& ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so \
+ 	&&	ln -s /usr/lib64/libfdfsclient.so /usr/local/lib/libfdfsclie nt.so \
+    && ln -s /usr/lib64/libfdfsclient.so /usr/lib/libfdfsclient.so
+     
 #瀹夎fastdfs
 WORKDIR ${FASTDFS_PATH}/download/fastdfs/fastdfs-${FASTDFS_VERSION}
-RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install && cp conf/* /etc/fdfs/"] 
+RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install"] 
 
+RUN ln -s /usr/bin/fdfs_trackerd   /usr/local/bin \
+	&& ln -s /usr/bin/fdfs_storaged   /usr/local/bin \
+	&& ln -s /usr/bin/stop.sh         /usr/local/bin \
+	&& ln -s /usr/bin/restart.sh      /usr/local/bin
 #娣诲姞鍒濆鍖栭厤缃�
 RUN mkdir -p /var/cache/nginx/proxy_cache/tmp 
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY fdfs_config/* /etc/fdfs/
-COPY ["start","stop","/home/jiuli/"]
-RUN chmod +x /home/jiuli/start \
-  && chmod +x /home/jiuli/stop \
-  && ln -s /home/jiuli/start /usr/local/bin/start_fdfs \
-  && ln -s /home/jiuli/stop /usr/local/bin/stop_fdfs
+#COPY ["start","stop","/home/jiuli/"]
 
-CMD ["/bin/bash","start_fdfs"] 
+#RUN chmod +x /home/jiuli/start \
+#  && chmod +x /home/jiuli/stop \
+# && ln -s /home/jiuli/start /usr/local/bin/start_fdfs \
+# && ln -s /home/jiuli/stop /usr/local/bin/stop_fdfs
+#  && service fdfs_trackerd start
+   
+CMD ["/etc/init.d/fdfs_trackerd", "start"] 
