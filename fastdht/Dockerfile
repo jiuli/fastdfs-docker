@@ -2,7 +2,18 @@
 FROM centos:7
 
 #AUTHOR
-MAINTAINER jiuli <jiuli@jiuli.com>
+MAINTAINER jiuli <jiuli@554856005@qq.com>
+
+#配置环境变量
+ENV CENTOS_VERSION=7 \
+  FASTDFS_PATH=/home/jiuli/fastdfs \
+  BERKELEY_DB_VERSION=6.2.23 \
+  LIB_FAST_COMMON_VERSION=1.0.36 \
+  FASTDHT_VERSION=7fac37e9a8e2c9ee2d4ccc309f96dbd35f2e0403
+#上面版本号为git commit时候生成的sha1 hash值。
+
+#创建必要的目录
+RUN mkdir -p ${FASTDFS_PATH}/fastdht
 
 #安装wget
 RUN yum install -y wget
@@ -16,16 +27,7 @@ RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backu
 #安装工具集
 RUN yum install -y zlib zlib-devel pcre pcre-devel gcc gcc-c++ openssl openssl-devel libevent libevent-devel perl unzip net-tools git
 
-#配置环境变量
-ENV CENTOS_VERSION=7 \
-  FASTDFS_PATH=/home/jiuli/fastdfs \
-  BERKELEY_DB_VERSION=6.2.23 \
-  LIB_FAST_COMMON_VERSION=1.0.36 \
-  FASTDHT_VERSION=7fac37e9a8e2c9ee2d4ccc309f96dbd35f2e0403
-#上面版本号为git commit时候生成的sha1 hash值。
 
-#创建必要的目录
-RUN mkdir -p ${FASTDFS_PATH}/fastdht
 
 #下载
 RUN wget https://github.com/happyfish100/libfastcommon/archive/V${LIB_FAST_COMMON_VERSION}.zip -P ${FASTDFS_PATH}/download/libfastcommon
@@ -60,4 +62,4 @@ RUN chmod +x /home/jiuli/start \
   && ln -s /home/jiuli/start /usr/local/bin/start_fdht \
   && ln -s /home/jiuli/stop /usr/local/bin/stop_fdht
 
-CMD ["bash","start_fdht"] 
+CMD ["/bin/bash","start_fdht"] 
