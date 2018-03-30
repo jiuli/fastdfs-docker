@@ -44,7 +44,7 @@ WORKDIR ${FASTDFS_PATH}/download/libfastcommon/libfastcommon-${LIB_FAST_COMMON_V
 RUN ["/bin/bash", "-c", "./make.sh && ./make.sh install"]
 RUN ln -s /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so \
 	&& ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so \
- 	&&	ln -s /usr/lib64/libfdfsclient.so /usr/local/lib/libfdfsclie nt.so \
+ 	&&	ln -s /usr/lib64/libfdfsclient.so /usr/local/lib/libfdfsclient.so \
     && ln -s /usr/lib64/libfdfsclient.so /usr/lib/libfdfsclient.so
     
 #瀹夎berkeley db
