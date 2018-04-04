@@ -1,4 +1,4 @@
-﻿锘�#!/bin/base on docker centos 
+﻿#!/bin/base on docker centos 
 FROM centos:7
 
 #AUTHOR
